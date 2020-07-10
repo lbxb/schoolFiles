@@ -1,0 +1,24 @@
+	.data
+x: .word 1 2 3 4
+y: .word 5 6 7 8
+n: .word 2
+size: .word 4
+
+	.text
+	la $t0, x
+	la $t1, y
+	la $t2, n
+	la $t3, size
+	lw $t4, 0($t3)
+	
+loop: 	lw $t5, 0($t0)
+	lw $t6, 0($t1)
+	multu $t5, $t6 #success in mult
+	mflo $t9 #does move it to t9
+	addi $t0, $t0, 4 #increment?
+	addi $t1, $t1, 4 #increment?
+	addi $t4, $t4, -1 #decrement so it knows when to stop
+	
+	slt $t8, $zero, $t4
+	
+	bne $t8, $zero, loop

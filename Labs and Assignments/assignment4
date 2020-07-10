@@ -1,0 +1,16 @@
+.data
+
+.text
+
+main:
+	lb $t0, 0xffff0000
+	beqz $t0, main
+	lb $s0, 0xffff0004
+	sb $s0, 0xffff000c
+
+
+wait: 	la $t1, 0xffff0008
+	beqz $t1, wait #call to loop if bit picked up
+	andi $t0, 0x00000000 #mask
+
+	j main
